@@ -1,0 +1,20 @@
+html{
+    background-color: aquamarine ;
+}
+.cadastro{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+button{
+    width: 158px;
+}
+input{
+    width: 150px    ;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
