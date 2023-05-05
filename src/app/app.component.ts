@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
-
-
 interface Tarefas{
   id: number;
  nome: string;
  descricao: string;
+ categoria: string;
 }
 
 @Component({
@@ -21,7 +20,8 @@ export class AppComponent {
   Tarefas: Tarefas = {
   nome : '',
   id : 1,
-  descricao:''
+  descricao:'',
+  categoria:''
   }
 
   cadastrarUsuario():void{
@@ -29,7 +29,8 @@ export class AppComponent {
     const Tarefa: Tarefas= {
       nome:this.Tarefas.nome,
       id : this.nextId ,
-      descricao: this.Tarefas.descricao
+      descricao: this.Tarefas.descricao,
+      categoria: this.Tarefas.categoria
     }
     this.trfs.push(Tarefa);
 
@@ -38,10 +39,9 @@ export class AppComponent {
     
      this.nextId ++
      localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
-  
+    
+     
   }
-  
-  indice2 = 0;
   
   removerTarefa(indice):void{
     this.trfs.splice(indice, 1)
@@ -54,6 +54,10 @@ export class AppComponent {
       this.trfs = JSON.parse(salvamento);
       this.nextId = this.trfs[this.trfs.length - 1].id + 1;
     }
+  }
+ 
+  mudar(): void{
+    localStorage.setItem('tarefas', JSON.stringify(this.trfs))
   }
 
 }
