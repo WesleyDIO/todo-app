@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body> 
+    <button style="background-color: aqua;"><a routerLink="/todo">Cadastrar Tarefas</a></button>
+    <div class="cadastro">
+        <h1>Cadastrar Categorias</h1>
+        <input placeholder="Nome" [(ngModel)]='categorias.nome'>
+        <button (click)="cadastrarCategoria()" style="background-color: aqua ;">Cadastrar</button>
+      </div>
+      <h1>Categorias</h1>
+      <div class="categoria" >
+      <div class="tarefasAdicionadas" *ngFor="let ctg of ctgs, index as indice;">
+        <div class="tarefa">
+          <div *ngIf="ctg.nome === ctg.nome">
+            <h3>
+               {{ctg.nome}}
+              <br>
+            </h3>
+            <button (click)="removerCategoria(indice)">Remover</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
