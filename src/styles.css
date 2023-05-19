@@ -1,5 +1,8 @@
+@import url('https://fonts.cdnfonts.com/css/lovelo?styles=25962');
+
 html{
-    background-color: aquamarine ;
+    background-color: pink ;
+
 }
 .cadastro{
     display: flex;
@@ -8,12 +11,16 @@ html{
 }
 button{
     width: 158px;
+    border-radius: 10px;
 }
 input{
     width: 150px    ;
+    border-radius: 10px;
 }
 
 h1{
+    font-family: 'Lovelo', sans-serif;
+    font-size: large;
     display: flex;
     justify-content: center;
 }
@@ -21,8 +28,26 @@ h1{
     height: 100%;
     display: flex;
     justify-content: space-around;
-    margin: 20px;
-    border: 1px solid black;
+    margin-top: 20px;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+.head{
+    font-size: 60px;
+    width:340px;
+    height: 60px;
+    border: 1px solid white ;
+    font-family: 'Lovelo', sans-serif;
+    display: flex;
+    color: azure;
+    align-items: center;
+}
+.head-todo{
+    display: flex;
+    justify-content: center;
+    
 }
 
 

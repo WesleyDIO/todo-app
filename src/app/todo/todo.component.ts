@@ -6,6 +6,10 @@ interface Tarefas{
    descricao: string;
    categoria: string;
   }
+
+  interface categoria {
+    nome: string;
+  }
   
 
 @Component({
@@ -15,6 +19,12 @@ interface Tarefas{
 export class TodoComponent{
     trfs: Tarefas[] = [];
     nextId = 1;
+
+
+    ctgs: categoria[] = []; // Propriedade que armazena as categorias
+
+      categorias: categoria = { nome: '' }
+
   
     Tarefas: Tarefas = {
     nome : '',
@@ -23,8 +33,16 @@ export class TodoComponent{
     categoria:''
     }
   
-    cadastrarUsuario():void{
+    cadastrar():void{
   
+        if(!this.Tarefas.categoria || !this.Tarefas.nome ){
+          return;
+        }
+
+        if(this.verificarTarefa(this.Tarefas.categoria, this.Tarefas.nome)){
+          return;
+        }
+
       const Tarefa: Tarefas= {
         nome:this.Tarefas.nome,
         id : this.nextId ,
@@ -34,13 +52,12 @@ export class TodoComponent{
       this.trfs.push(Tarefa);
       
 
-      this.Tarefas.nome=null;
-      this.Tarefas.descricao=null;
+      this.Tarefas.nome="";
+      this.Tarefas.descricao="";
       
        this.nextId ++
        localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
       
-       
     }
     
     removerTarefa(indice):void{
@@ -51,14 +68,29 @@ export class TodoComponent{
     ngOnInit(){
       const salvamento = localStorage.getItem('tarefas');
       if(salvamento){
-        this.trfs = JSON.parse(salvamento);
+        this.trfs = JSON.parse(salvamento)
+        if(this.trfs.length > 0){
         this.nextId = this.trfs[this.trfs.length - 1].id + 1;
+        }
       }
+      const categoriasSalvas = localStorage.getItem('categorias')
+    if (categoriasSalvas) {
+      this.ctgs = JSON.parse(categoriasSalvas)
+    }
     }
    
     mudar(): void{
       localStorage.setItem('tarefas', JSON.stringify(this.trfs))
     }
   
+    verificarTarefa(categoria: string, nome: string): boolean {
+      for (const tarefa of this.trfs) {
+        if (tarefa.categoria === categoria && tarefa.nome === nome) {
+          return true;
+        }
+      }
+      return false;
+    }
+
   }
   

@@ -48,13 +48,16 @@ export class AppComponent {
     localStorage.setItem('tarefas', JSON.stringify(this.trfs));
   }
 
-  ngOnInit(){
+  ngOnInit() {
     const salvamento = localStorage.getItem('tarefas');
-    if(salvamento){
+    if (salvamento) {
       this.trfs = JSON.parse(salvamento);
-      this.nextId = this.trfs[this.trfs.length - 1].id + 1;
+      if (this.trfs.length > 0) {
+        this.nextId = this.trfs[this.trfs.length - 1].id + 1;
+      }
     }
   }
+  
  
   mudar(): void{
     localStorage.setItem('tarefas', JSON.stringify(this.trfs))
