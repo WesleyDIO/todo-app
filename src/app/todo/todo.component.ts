@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 
+
 interface Tarefas{
     id: number;
    nome: string;
@@ -24,6 +25,10 @@ export class TodoComponent{
     ctgs: categoria[] = []; // Propriedade que armazena as categorias
 
       categorias: categoria = { nome: '' }
+      categoria: string = ""
+      
+      categoriaDrop: categoria;
+      tarefaDrop: Tarefas;
 
   
     Tarefas: Tarefas = {
@@ -78,6 +83,7 @@ export class TodoComponent{
       this.ctgs = JSON.parse(categoriasSalvas)
     }
     }
+    
    
     mudar(): void{
       localStorage.setItem('tarefas', JSON.stringify(this.trfs))
@@ -91,6 +97,18 @@ export class TodoComponent{
       }
       return false;
     }
+
+    allowDrop(ev) {
+      this.tarefaDrop.categoria = ev
+      localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
+    }
+  
+    drag(ev) {
+      this.tarefaDrop= ev;
+      console.log(this.tarefaDrop);
+    }
+    
+    
 
   }
   

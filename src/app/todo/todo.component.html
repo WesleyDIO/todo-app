@@ -31,18 +31,18 @@
 
   <div>
     <div class="categoria" >
-      <div class="todo" (change)="mudar()" *ngFor="let ctg of ctgs;">
+      <div  class="todo" (change)="mudar()" *ngFor="let ctg of ctgs;" (dragover) = "allowDrop(ctg.nome)">
         <h1>{{ctg.nome}}</h1>
-        <div *ngFor="let trf of trfs;" >
-          <div *ngIf="trf.categoria === ctg.nome, index as indice">
+        <div draggable = "true"  *ngFor="let trf of trfs;" (dragstart) = "drag(trf)" >
+          <div class="drop"  style="border:solid black ;" *ngIf="trf.categoria === ctg.nome, index as indice"  >
+            
             <h4>
               {{trf.id}}
               Tarefa: {{trf.nome}}
               <br>
               Descrição: {{trf.descricao}}
               <br>
-              categoria: {{trf.categoria}}
-              <br>
+          
               <select name="selecionar" [(ngModel)]='trf.categoria'style="border-radius: 10px;">
                 <option *ngFor="let ctg of ctgs; index as indice"> {{ctg.nome}}</option>
               </select>

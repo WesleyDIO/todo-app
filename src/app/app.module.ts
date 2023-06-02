@@ -12,6 +12,7 @@ import { TodoComponent } from './todo/todo.component';
     AppComponent,
     CategoriaComponent,
     TodoComponent
+
   ],
   imports: [
     BrowserModule,
