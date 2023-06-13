@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { forEach } from "@angular/router/src/utils/collection";
 
 
 interface Tarefas{
@@ -29,6 +30,7 @@ export class TodoComponent{
       
       categoriaDrop: categoria;
       tarefaDrop: Tarefas;
+      indexDrop: number;
 
   
     Tarefas: Tarefas = {
@@ -65,9 +67,9 @@ export class TodoComponent{
       
     }
     
-    removerTarefa(indice):void{
-      this.trfs.splice(indice, 1)
-      localStorage.setItem('tarefas', JSON.stringify(this.trfs));
+    removerTarefa(index): void {
+      this.trfs.splice(index, 1);
+    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
     }
   
     ngOnInit(){
@@ -98,14 +100,25 @@ export class TodoComponent{
       return false;
     }
 
-    allowDrop(ev) {
-      this.tarefaDrop.categoria = ev
+    allowDrop(categoria, event: Event) {
+      event.preventDefault();
+      this.tarefaDrop.categoria = categoria
+      console.log(categoria)
       localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
+     
+
     }
   
-    drag(ev) {
-      this.tarefaDrop= ev;
-      console.log(this.tarefaDrop);
+    drag(trf) {
+      this.tarefaDrop= trf;
+   
+    }
+    
+    drop (event: Event, index): void {
+      event.preventDefault();
+      this.trfs.splice(this.trfs.indexOf(this.tarefaDrop), 1);
+      this.trfs.splice(index, 0, this.tarefaDrop);
+  
     }
     
     

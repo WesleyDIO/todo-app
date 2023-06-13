@@ -12,7 +12,7 @@
 
 <body>
   <header>
-    <button  style="background-color: antiquewhite;"><a routerLink="/categoria">Cadastrar Categorias</a></button>
+    <button  style="background-color: rgb(252, 252, 252);"><a routerLink="/categoria">Cadastrar Categorias</a></button>
     <div class="head-todo">
     <h1 class="head">TODO-APP</h1>
   </div>
@@ -25,16 +25,17 @@
       
     </select>
 
-    <button (click)="cadastrar()" style="background-color: antiquewhite ;"> Cadastrar</button>
+    <button (click)="cadastrar()" style="background-color: rgb(228, 228, 228) ;"> Cadastrar</button>
 
   </div>
 
   <div>
     <div class="categoria" >
-      <div  class="todo" (change)="mudar()" *ngFor="let ctg of ctgs;" (dragover) = "allowDrop(ctg.nome)">
+      <div  class="todo" (change)="mudar()" *ngFor="let ctg of ctgs;" (dragover) = "allowDrop(ctg.nome, $event)">
         <h1>{{ctg.nome}}</h1>
-        <div draggable = "true"  *ngFor="let trf of trfs;" (dragstart) = "drag(trf)" >
-          <div class="drop"  style="border:solid black ;" *ngIf="trf.categoria === ctg.nome, index as indice"  >
+        <div *ngFor="let trf of trfs; index as index">
+          <div class="drop"  style="border:solid rgb(230, 229, 229) ;" *ngIf="trf.categoria === ctg.nome"  >
+            <div draggable="true" (dragstart)="drag(trf)" (drop)="drop($event, index)">
             
             <h4>
               {{trf.id}}
@@ -44,10 +45,11 @@
               <br>
           
               <select name="selecionar" [(ngModel)]='trf.categoria'style="border-radius: 10px;">
-                <option *ngFor="let ctg of ctgs; index as indice"> {{ctg.nome}}</option>
+                <option *ngFor="let ctg of ctgs;"> {{ctg.nome}}</option>
               </select>
             </h4>
-            <button (click)="removerTarefa(indice)">remover</button>
+            <button (click)="removerTarefa(index)">remover</button>
+          </div>
           </div>
         </div>
       </div>
