@@ -25,7 +25,7 @@
       
     </select>
 
-    <button (click)="cadastrar()" [disabled]="!hasPermission('Add')" style="background-color: rgb(228, 228, 228) ;"> Cadastrar</button>
+    <button (click)="cadastrar()"  style="background-color: rgb(228, 228, 228) ;"> Cadastrar</button>
 
   </div>
 
@@ -48,7 +48,7 @@
                 <option *ngFor="let ctg of ctgs;"> {{ctg.nome}}</option>
               </select>
             </h4>
-            <button (click)="removerTrf(index)" [disabled]="!hasPermission('Remove')">remover</button>
+            <button (click)="removerTrf(index)">remover</button>
           </div>
           </div>
         </div>

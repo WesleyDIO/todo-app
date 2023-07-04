@@ -1,0 +1,81 @@
+#registrar{
+    width: 400px;
+    height: 400px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    
+
+}
+#id{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+#nome{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+#senha{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+#email{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+#inputs{
+    width: 100%;
+    height:65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+#divH2{
+    height: 22%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+#cadastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: antiquewhite;
+    color: black;
+    border: black;
+
+}
+
+#entrar{
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+#quadro{
+    display: flex;
+    justify-content: space-around;
+    padding-top: px;
+}
+#logar{
+    background-color: rgb(252, 252, 252);
+}
+#h2Todo{
+    display: flex;
+    justify-content: center;
+    font-family: 'Lovelo', sans-serif;
+    font-size: 40px;
+  
+}

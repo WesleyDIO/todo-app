@@ -1,67 +1,76 @@
 import { Component } from "@angular/core";
 import { User } from "src/models/users/user";
 import { UserRepository } from "src/repositories/user.repository";
+import { TesteService } from "src/services/teste.service";
 
 
-interface Tarefas{
-    id: number;
-   nome: string;
-   descricao: string;
-   categoria: string;
-  }
+interface Tarefas {
+  id: number;
+  nome: string;
+  descricao: string;
+  categoria: string;
+}
 
-  interface categoria {
-    nome: string;
-  }
-  
+interface categoria {
+  nome: string;
+}
+
 
 @Component({
-    templateUrl:'./todo.component.html',
+  templateUrl: './todo.component.html',
 })
 
-export class TodoComponent{
+export class TodoComponent {
 
   private userId: string = 'joao.silva';
   private users: User[] = [];
   user!: User;
 
   constructor(
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private testeService: TesteService
   ) {
-    this.users = this.userRepository.getUsers();
-    this.user = this.getUsuarioLogado();
-    console.log(this.user);
+    userRepository.getUsers().subscribe({
+      next: (value) => {
+        this.users = value;
+        this.user = this.getUsuarioLogado();
+      }
+    })
   }
 
-  adicionarTarefa(): void {
-    if (!this.hasPermission('Add')) {
-      alert('Não pode cadastrar');
-      return;
-    }
-    alert('Pode cadastrar');
-  }
+  // adicionarTarefa(): void {
+  //   if (!this.hasPermission('Add')) {
+  //     alert('Não pode cadastrar');
+  //     return;
+  //   }
+  //   alert('Pode cadastrar');
+  // }
 
-  editarTarefa(): void {
-    if (!this.hasPermission('Edit')) {
-      alert('Não pode cadastrar');
-      return;
-    }
-    alert('Pode cadastrar');
-  }
+  // editarTarefa(): void {
+  //   if (!this.hasPermission('Edit')) {
+  //     alert('Não pode cadastrar');
+  //     return;
+  //   }
+  //   alert('Pode cadastrar');
+  // }
 
-  removerTarefa(): void {
-    if (!this.hasPermission('Remove')) {
-      alert('Não pode cadastrar');
-      return;
-    }
-    this.removerTrf
-  }
+  // removerTarefa(): void {
+  //   if (!this.hasPermission('Remove')) {
+  //     alert('Não pode cadastrar');
+  //     return;
+  //   }
+  //   this.removerTrf
+  // }
 
-  hasPermission(permission: string): boolean {
-    return this.user.cardPermissions.some((cardPermission) => {
-      return cardPermission === permission;
-    });
-  }
+  // hasPermission(permission: string): boolean {
+  //   if (User === undefined) {
+  //     return this.user.cardPermissions.some((cardPermission) => {
+  //       return cardPermission === permission;
+  //     });
+  //   }
+  //    return false;
+
+  // }
 
   private getUsuarioLogado(): User {
     return this.users.find((user) => {
@@ -71,109 +80,109 @@ export class TodoComponent{
 
 
 
-    trfs: Tarefas[] = [];
-    nextId = 1;
+  trfs: Tarefas[] = [];
+  nextId = 1;
 
 
-    ctgs: categoria[] = []; // Propriedade que armazena as categorias
+  ctgs: categoria[] = []; // Propriedade que armazena as categorias
 
-      categorias: categoria = { nome: '' }
-      categoria: string = ""
-      
-      categoriaDrop: categoria;
-      tarefaDrop: Tarefas;
-      indexDrop: number;
+  categorias: categoria = { nome: '' }
+  categoria: string = ""
 
-  
-    Tarefas: Tarefas = {
-    nome : '',
-    id : 1,
-    descricao:'',
-    categoria:''
+  categoriaDrop: categoria;
+  tarefaDrop: Tarefas;
+  indexDrop: number;
+
+
+  Tarefas: Tarefas = {
+    nome: '',
+    id: 1,
+    descricao: '',
+    categoria: ''
+  }
+
+  cadastrar(): void {
+
+    if (!this.Tarefas.categoria || !this.Tarefas.nome) {
+      return;
     }
-  
-    cadastrar():void{
-  
-        if(!this.Tarefas.categoria || !this.Tarefas.nome ){
-          return;
-        }
 
-        if(this.verificarTarefa(this.Tarefas.categoria, this.Tarefas.nome)){
-          return;
-        }
-
-      const Tarefa: Tarefas= {
-        nome:this.Tarefas.nome,
-        id : this.nextId ,
-        descricao: this.Tarefas.descricao,
-        categoria: this.Tarefas.categoria
-      }
-      this.trfs.push(Tarefa);
-      
-
-      this.Tarefas.nome="";
-      this.Tarefas.descricao="";
-      
-       this.nextId ++
-       localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
-      
+    if (this.verificarTarefa(this.Tarefas.categoria, this.Tarefas.nome)) {
+      return;
     }
-    
-    removerTrf(index): void {
-      this.trfs.splice(index, 1);
+
+    const Tarefa: Tarefas = {
+      nome: this.Tarefas.nome,
+      id: this.nextId,
+      descricao: this.Tarefas.descricao,
+      categoria: this.Tarefas.categoria
+    }
+    this.trfs.push(Tarefa);
+
+
+    this.Tarefas.nome = "";
+    this.Tarefas.descricao = "";
+
+    this.nextId++
     localStorage.setItem('tarefas', JSON.stringify(this.trfs));
-    }
-  
-    ngOnInit(){
-      const salvamento = localStorage.getItem('tarefas');
-      if(salvamento){
-        this.trfs = JSON.parse(salvamento)
-        if(this.trfs.length > 0){
+
+  }
+
+  removerTrf(index): void {
+    this.trfs.splice(index, 1);
+    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
+  }
+
+  ngOnInit() {
+    const salvamento = localStorage.getItem('tarefas');
+    if (salvamento) {
+      this.trfs = JSON.parse(salvamento)
+      if (this.trfs.length > 0) {
         this.nextId = this.trfs[this.trfs.length - 1].id + 1;
-        }
       }
-      const categoriasSalvas = localStorage.getItem('categorias')
+    }
+    const categoriasSalvas = localStorage.getItem('categorias')
     if (categoriasSalvas) {
       this.ctgs = JSON.parse(categoriasSalvas)
     }
-    }
-    
-   
-    mudar(): void{
-      localStorage.setItem('tarefas', JSON.stringify(this.trfs))
-    }
-  
-    verificarTarefa(categoria: string, nome: string): boolean {
-      for (const tarefa of this.trfs) {
-        if (tarefa.categoria === categoria && tarefa.nome === nome) {
-          return true;
-        }
+  }
+
+
+  mudar(): void {
+    localStorage.setItem('tarefas', JSON.stringify(this.trfs))
+  }
+
+  verificarTarefa(categoria: string, nome: string): boolean {
+    for (const tarefa of this.trfs) {
+      if (tarefa.categoria === categoria && tarefa.nome === nome) {
+        return true;
       }
-      return false;
     }
+    return false;
+  }
 
-    allowDrop(categoria, event: Event) {
-      event.preventDefault();
-      this.tarefaDrop.categoria = categoria
-      console.log(categoria)
-      localStorage.setItem('tarefas', JSON.stringify(this.trfs ));
-     
+  allowDrop(categoria, event: Event) {
+    event.preventDefault();
+    this.tarefaDrop.categoria = categoria
+    console.log(categoria)
+    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
 
-    }
-  
-    drag(trf) {
-      this.tarefaDrop= trf;
-   
-    }
-    
-    drop (event: Event, index): void {
-      event.preventDefault();
-      this.trfs.splice(this.trfs.indexOf(this.tarefaDrop), 1);
-      this.trfs.splice(index, 0, this.tarefaDrop);
-  
-    }
-    
-    
 
   }
-  
+
+  drag(trf) {
+    this.tarefaDrop = trf;
+
+  }
+
+  drop(event: Event, index): void {
+    event.preventDefault();
+    this.trfs.splice(this.trfs.indexOf(this.tarefaDrop), 1);
+    this.trfs.splice(index, 0, this.tarefaDrop);
+
+  }
+
+
+
+}
+
