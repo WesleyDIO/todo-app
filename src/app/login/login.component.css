@@ -2,6 +2,7 @@ body{
     padding: 0;
     margin:0;
     width: 100%;
+    
 }
 #cadastro{
     background-color: rgb(252, 252, 252);
@@ -41,6 +42,7 @@ h3{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
     
 }
 #titulo{
@@ -65,6 +67,7 @@ h3{
     justify-content: center;
     font-family: 'Lovelo', sans-serif;
     font-size: 40px;
+    
   
 }
 
@@ -76,11 +79,12 @@ button{
     font-size: medium;
 }
 
-a{
+.router{
     text-decoration: none;
     color: white;
-    font-family: 'Lovelo', sans-serif;
+    font-family:'Times New Roman', Times, serif;
 }
+
 
 input{
     font-weight: bold;
@@ -93,7 +97,5 @@ input::placeholder{
     color: black;
 }
 
-header{
-    background-color: black;
-    padding: 0 20;
-}
+
+

@@ -11,6 +11,8 @@ import { AuthGuardService } from 'src/services/auth-guard.service';
 import { TesteService } from 'src/services/teste.service';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro.component';
 import { LoginComponent } from './login/login.component';
+import { CookieService } from 'src/services/cookie.service';
+import { AuthGuardAutorize } from 'src/services/auth-guard-Autorize';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { LoginComponent } from './login/login.component';
     TodoComponent,
     CategoriaComponent,
     CadastroUsuarioComponent, 
-    LoginComponent
+    LoginComponent,
+    AuthGuardAutorize
 
   ],
   imports: [
@@ -31,7 +34,9 @@ import { LoginComponent } from './login/login.component';
   providers: [
     UserRepository,
     AuthGuardService,
-    TesteService
+    TesteService,
+    CookieService,
+    AuthGuardAutorize
   ],
   bootstrap: [AppComponent]
 })

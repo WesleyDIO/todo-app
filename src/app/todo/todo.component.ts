@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { User } from "src/models/users/user";
 import { UserRepository } from "src/repositories/user.repository";
+import { CookieService } from "src/services/cookie.service";
 import { TesteService } from "src/services/teste.service";
 
 
@@ -28,7 +29,8 @@ export class TodoComponent {
 
   constructor(
     private userRepository: UserRepository,
-    private testeService: TesteService
+    private testeService: TesteService,
+    private cookie: CookieService
   ) {
     userRepository.getUsers().subscribe({
       next: (value) => {
@@ -124,24 +126,24 @@ export class TodoComponent {
     this.Tarefas.descricao = "";
 
     this.nextId++
-    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1);
 
   }
 
   removerTrf(index): void {
     this.trfs.splice(index, 1);
-    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs), 1)
   }
 
-  ngOnInit() {
-    const salvamento = localStorage.getItem('tarefas');
+  ngOnInit() {    
+    const salvamento = this.cookie.getCookie('tarefas');
     if (salvamento) {
       this.trfs = JSON.parse(salvamento)
       if (this.trfs.length > 0) {
         this.nextId = this.trfs[this.trfs.length - 1].id + 1;
       }
     }
-    const categoriasSalvas = localStorage.getItem('categorias')
+    const categoriasSalvas = this.cookie.getCookie('categorias')
     if (categoriasSalvas) {
       this.ctgs = JSON.parse(categoriasSalvas)
     }
@@ -149,7 +151,7 @@ export class TodoComponent {
 
 
   mudar(): void {
-    localStorage.setItem('tarefas', JSON.stringify(this.trfs))
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1)
   }
 
   verificarTarefa(categoria: string, nome: string): boolean {
@@ -165,9 +167,8 @@ export class TodoComponent {
     event.preventDefault();
     this.tarefaDrop.categoria = categoria
     console.log(categoria)
-    localStorage.setItem('tarefas', JSON.stringify(this.trfs));
-
-
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1);
+    
   }
 
   drag(trf) {
