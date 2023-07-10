@@ -10,27 +10,25 @@ const rotas: Route[] = [
     {
         path: 'categoria',
         component: CategoriaComponent,
-        canActivate:[AuthGuardService]
+        canActivate: [AuthGuardService]
     },
     {
         path: 'todo',
         component: TodoComponent,
-        canActivate:[AuthGuardService]
+        canActivate: [AuthGuardService]
     },
     {
         path: 'cadastro',
         component:   CadastroUsuarioComponent
 
-
     },
     {
     path: 'login',
     component: LoginComponent
-
     },
     {
         path:'',
-        redirectTo:'login',
+        redirectTo:'cadastro',
         pathMatch:'full'
     }
 ]

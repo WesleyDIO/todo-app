@@ -1,24 +1,29 @@
 import { Injectable } from "@angular/core";
-import { join } from "path";
 import { User } from "src/models/users/user";
 import { CookieService } from "./cookie.service";
 
-@Injectable()
-export class AuthGuardAutorize{
+@Injectable(
+    {
+        providedIn: 'root'
+    }
+)
+export class AuthAutorize {
+
     constructor(
-        private cookieLogado: CookieService
+        private cookie: CookieService
     ){
-        const logado = cookieLogado.getCookie('logado') || null
+        const logado = this.cookie.getCookie("logado")
         this.logado = JSON.parse(logado)
     }
 
     logado: User
-    autorize():boolean{
+
+    autorizeOn(): boolean{
         if(this.logado){
             return true
         }
-        else{
-            return false
-        }
+        
+        return false
     }
+
 }

@@ -23,7 +23,7 @@ export class CategoriaComponent implements OnInit{
   private userId: string = 'joao.silva';
   private users: User[] = [];
   user!: User;
-  
+
   constructor(
     private cookie: CookieService,
     private userRepository: UserRepository,
@@ -56,8 +56,6 @@ export class CategoriaComponent implements OnInit{
     descricao:'',
     categoria:''
     }
-  
-  
 
   ngOnInit(): void {
     // Recupera os dados salvos no localStorage, se houver
@@ -78,16 +76,19 @@ export class CategoriaComponent implements OnInit{
     this.ctgs.push(categoria)
     this.categorias.nome = ''
 
-    // Salva as categorias atualizadas no localStorage
-    this.cookie.setCookie('categorias', JSON.stringify(this.ctgs),1)
+    // Salva as categorias atualizadas no cookie
+    this.cookie.setCookie('categorias',JSON.stringify(this.ctgs), 1);
+    
     
   }
   removerCategoria(indice: number):void{
     this.ctgs.splice(indice, 1);
-    this.cookie.setCookie('categorias', JSON.stringify(this.ctgs),1);
+    this.cookie.setCookie('categorias', JSON.stringify(this.ctgs),1)
+    
     
     this.trfs.splice(indice, 1)
-    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1)
+    this.cookie.setCookie('tarefas', JSON.stringify(this.ctgs),1)
+    
   }
    
   verificaCategoria(ctg: string): boolean{

@@ -40,6 +40,7 @@ export class TodoComponent {
     })
   }
 
+
   // adicionarTarefa(): void {
   //   if (!this.hasPermission('Add')) {
   //     alert('Não pode cadastrar');
@@ -126,16 +127,16 @@ export class TodoComponent {
     this.Tarefas.descricao = "";
 
     this.nextId++
-    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1);
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1)
 
   }
 
   removerTrf(index): void {
     this.trfs.splice(index, 1);
-    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs), 1)
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1)
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     const salvamento = this.cookie.getCookie('tarefas');
     if (salvamento) {
       this.trfs = JSON.parse(salvamento)
@@ -167,8 +168,9 @@ export class TodoComponent {
     event.preventDefault();
     this.tarefaDrop.categoria = categoria
     console.log(categoria)
-    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1);
-    
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs), 1);
+
+
   }
 
   drag(trf) {

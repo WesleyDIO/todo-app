@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(
     private userRepository: UserRepository,
     private testeService: TesteService,
-    private cookie: CookieService
+    private cookie: CookieService 
   ) {
     userRepository.getUsers().subscribe({
       next: (value) => {

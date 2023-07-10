@@ -42,7 +42,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family: 'Times New Roman', Times, serif;
     
 }
 
@@ -68,37 +67,15 @@
 #quadro{
     display: flex;
     justify-content: space-around;
-    padding-top: 10px;
+    padding-top: px;
 }
-
+#logar{
+    background-color: rgb(252, 252, 252);
+}
 #h2Todo{
     display: flex;
     justify-content: center;
     font-family: 'Lovelo', sans-serif;
     font-size: 40px;
   
-}
-input{
-    font-weight: bold;
-    border-radius: 7px;
-    height: 25px;
-    font-size: medium;
-}
-
-input::placeholder{
-    color: black;
-}
-
-button{
-    width: 110px;
-    cursor: pointer;
-    height: 30px;
-    font-weight: bold;
-    font-size: medium;
-}
-
-a{
-    text-decoration: none;
-    color: white;
-    font-family:'Times New Roman', Times, serif;
 }

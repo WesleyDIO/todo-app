@@ -65,7 +65,7 @@ export class CadastroUsuarioComponent implements OnInit {
       window.location.replace("http://localhost:4200/login")
       cadastrado = false;
     }
-        
+
   }
 
 
