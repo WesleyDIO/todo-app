@@ -77,9 +77,7 @@ button{
 }
 
 a{
-    text-decoration: none;
-    color: white;
-    font-family: 'Lovelo', sans-serif;
+    color: black; 
 }
 
 input{
@@ -92,8 +90,7 @@ input{
 input::placeholder{
     color: black;
 }
-
-header{
-    background-color: black;
-    padding: 0 20;
+.link{
+    color: black;
+    
 }

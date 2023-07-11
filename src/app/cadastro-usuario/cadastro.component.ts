@@ -48,11 +48,17 @@ export class CadastroUsuarioComponent implements OnInit {
         this.email = "";
         cadastrado = false
       }
-    });
+     });
 
-
-
+     if(this.id === '' || this.id === null || this.id === undefined || this.nome === '' || this.nome === null || this.nome === undefined ||
+      this.password === '' || this.password === null || this.password === undefined || this.email === '' || this.email === null || this.email === undefined){
+        cadastrado = false
+        alert("Complete todos os campos")
+      }
+    
     if (cadastrado == true) {
+     
+  
       this.httpClient.post<User[]>("http://localhost:4300/usuarios/cadastro", usuario)
         .subscribe((req) => {
         })
@@ -65,7 +71,7 @@ export class CadastroUsuarioComponent implements OnInit {
       window.location.replace("http://localhost:4200/login")
       cadastrado = false;
     }
-
+    
   }
 
 

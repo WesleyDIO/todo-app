@@ -167,9 +167,7 @@ export class TodoComponent {
   allowDrop(categoria, event: Event) {
     event.preventDefault();
     this.tarefaDrop.categoria = categoria
-    console.log(categoria)
     this.cookie.setCookie('tarefas', JSON.stringify(this.trfs), 1);
-
 
   }
 
@@ -182,6 +180,7 @@ export class TodoComponent {
     event.preventDefault();
     this.trfs.splice(this.trfs.indexOf(this.tarefaDrop), 1);
     this.trfs.splice(index, 0, this.tarefaDrop);
+    this.cookie.setCookie('tarefas', JSON.stringify(this.trfs),1)
 
   }
 
